@@ -7,7 +7,7 @@ on:
 jobs:           
   compile:      # this refers to a job means it will do the compile the source code, inside a job there can be multiple jobs
 
-    runs-on: ubuntu-latest  # this refers to a ubuntu machine shared runner provided by github, shared runner can be ubuntu, private vm, any runner that is provided by github
+    runs-on: self-hosted  # this refers to a ubuntu machine shared runner provided by github, shared runner can be ubuntu, private vm, any runner that is provided by github
 
     steps:     # inside each job there can be multiple steps
     - uses: actions/checkout@v4   # This will checkout the code means it will create a local copy, then only it run
@@ -23,7 +23,7 @@ jobs:
 
   security-check:      # this refers to a job means it will do the compile the source code, inside a job there can be multiple jobs
 
-    runs-on: ubuntu-latest  # this refers to a ubuntu machine shared runner provided by github, shared runner can be ubuntu, private vm, any runner that is provided by github
+    runs-on: self-hosted  # this refers to a ubuntu machine shared runner provided by github, shared runner can be ubuntu, private vm, any runner that is provided by github
     needs: compile
 
     steps:     # inside each job there can be multiple steps
