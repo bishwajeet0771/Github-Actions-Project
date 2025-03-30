@@ -26,18 +26,18 @@ jobs:
     runs-on: self-hosted  # this refers to a ubuntu machine shared runner provided by github, shared runner can be ubuntu, private vm, any runner that is provided by github
     needs: compile
 
-    steps:     # inside each job there can be multiple steps
-    - uses: actions/checkout@v4   # This will checkout the code means it will create a local copy, then only it run
-    - name: Trivy installation
+    steps:
+    - uses: actions/checkout@v4
+    - name: Trivy Installation
       run: |
-         sudo apt-get install wget apt-transport-https gnupg lsb-release
-         wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
-         echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
-         sudo apt-get update -y
-         sudo apt-get install -y trivy
-         
-    - name:  Trivy Fs Scan
-      run:  trivy fs --format table -o fs-report.json .
+        sudo apt-get install -y wget apt-transport-https gnupg lsb-release
+        wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+        echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+        sudo apt-get update -y
+        sudo apt-get install -y trivy
+
+    - name: Trivy FS Scan
+      run: trivy fs --format table -o fs-report.json .
 
     - name: Gitleaks installation
       run: sudo apt install gitleaks -y
